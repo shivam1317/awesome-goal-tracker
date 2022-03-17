@@ -1,0 +1,2 @@
+This is the figma file which contains the layout for frontend:
+https://www.figma.com/file/jtbnkhRiEiChZEq35zmePN/test?node-id=0%3A1
