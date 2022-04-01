@@ -1,0 +1,23 @@
+@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Mono&display=swap");
+
+.loginContainer {
+  height: 100vh;
+  width: 100%;
+  background: #dcdada;
+  font-family: "IBM Plex Mono", monospace;
+}
+
+.loginForm {
+  border-radius: 24px;
+  background: #dcdada;
+  box-shadow: 26px 26px 51px #a9a8a8, -26px -26px 51px #ffffff;
+}
+
+.formInput {
+  border-radius: 5px;
+  background: linear-gradient(145deg, #c6c4c4, #ebe9e9);
+  box-shadow: 5px 5px 10px #cdcbcb, -5px -5px 10px #ebe9e9;
+}
+.heading {
+  font-family: "IBM Plex Mono", monospace;
+}
