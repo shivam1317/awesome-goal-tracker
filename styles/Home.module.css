@@ -3,7 +3,76 @@
   height: 100vh;
   width: 100%;
   font-family: "IBM Plex Mono", monospace;
+}
+
+.highlighted {
+  /* color: skyblue; */
+  text-decoration: none;
+  box-shadow: inset 0 -0.3em 0 #9fa2ec;
+  color: inherit;
+}
+
+.headDiv {
+  /* background: linear-gradient(315deg, #dadada, #ffffff); */
+  background: #f2f2f2;
+}
+
+.intro {
+  border-radius: 50px;
+  background: linear-gradient(315deg, #dadada, #ffffff);
+  box-shadow: -16px -16px 32px #dfdfdf, 16px 16px 32px #ffffff;
+}
+
+.wave1 {
+  background-image: linear-gradient(
+    to right bottom,
+    #ffffff,
+    #efedfc,
+    #dedbf8,
+    #ccc9f5,
+    #bab8f1,
+    #afaff0,
+    #a4a6ef,
+    #989eee,
+    #939bef,
+    #8e98f0,
+    #8896f2,
+    #8293f3
+  );
+}
+
+.featuresDiv {
+  background-image: linear-gradient(
+    to right bottom,
+    #ffffff,
+    #efedfc,
+    #dedbf8,
+    #ccc9f5,
+    #bab8f1,
+    #afaff0,
+    #a4a6ef,
+    #989eee,
+    #939bef,
+    #8e98f0,
+    #8896f2,
+    #8293f3
+  );
+}
+
+.featureCard {
+  border-radius: 20px;
+  background: linear-gradient(225deg, #8f92d4, #aaadfd);
+  box-shadow: -10px 10px 20px #9a9de5, 10px -10px 20px #a4a7f3;
+  color: rgb(2, 53, 73);
+  font-weight: 500;
   display: flex;
-  justify-content: center;
+  justify-content: space-evenly;
   align-items: center;
+  width: 40%;
+  height: 170px;
+  flex-direction: column;
+  text-align: center;
+  /* border: 2px solid red; */
+  padding: 20px;
+  margin: 15px 0px;
 }

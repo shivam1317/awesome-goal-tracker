@@ -35,7 +35,7 @@ const Signup = () => {
           className={styles.formInput}
         >
           <Input
-            width="50%"
+            width="65%"
             placeholder="Email"
             variant="flushed"
             type="email"
@@ -54,7 +54,7 @@ const Signup = () => {
           className={styles.formInput}
         >
           <Input
-            width="50%"
+            width="65%"
             placeholder="Password"
             variant="flushed"
             type="password"

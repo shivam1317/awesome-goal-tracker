@@ -10,7 +10,7 @@
 .loginForm {
   border-radius: 24px;
   background: #dcdada;
-  box-shadow: 26px 26px 51px #a9a8a8, -26px -26px 51px #ffffff;
+  box-shadow: 20px 20px 40px #c6c4c4, -20px -20px 40px #f2f0f0;
 }
 
 .formInput {

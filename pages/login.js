@@ -39,7 +39,7 @@ function login() {
           className={styles.formInput}
         >
           <Input
-            width="150px"
+            width="65%"
             placeholder="Email"
             variant="flushed"
             type="email"
@@ -58,7 +58,7 @@ function login() {
           className={styles.formInput}
         >
           <Input
-            width="150px"
+            width="65%"
             variant="flushed"
             placeholder="Password"
             type="password"
