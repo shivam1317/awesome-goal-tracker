@@ -13,16 +13,16 @@ const Signup = () => {
     >
       <Box
         className={styles.loginForm}
-        h="400px"
-        w="380px"
+        h={{ lg: "420px", base: "450px" }}
+        w={{ lg: "400px", base: "90%" }}
         display="flex"
-        p="5px"
+        p={{ lg: "5px", base: "15px" }}
         justifyContent="space-evenly"
         flexDirection="column"
         alignItems="center"
       >
         <Text fontSize="2xl" className={styles.heading} fontWeight="bold">
-          Sign up
+          Sign Up
         </Text>
         <Square
           display="flex"

@@ -17,10 +17,10 @@ function login() {
     >
       <Box
         className={styles.loginForm}
-        h="420px"
-        w="400px"
+        h={{ lg: "420px", base: "450px" }}
+        w={{ lg: "400px", base: "90%" }}
         display="flex"
-        p="5px"
+        p={{ lg: "5px", base: "15px" }}
         justifyContent="space-evenly"
         flexDirection="column"
         alignItems="center"
