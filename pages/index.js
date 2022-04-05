@@ -1,7 +1,7 @@
-import { Box, Text, Button } from "@chakra-ui/react";
+import { Box, Text, Button, Image } from "@chakra-ui/react";
 import Head from "next/head";
 import styles from "../styles/Home.module.css";
-import Image from "next/image";
+// import Image from "next/image";
 import Link from "next/link";
 import { CgNotes } from "react-icons/cg";
 import { SiGooglemeet } from "react-icons/si";
@@ -22,16 +22,17 @@ export default function Home() {
         mt="10px"
         p="20px"
         className={styles.headDiv}
+        flexWrap="wrap-reverse"
       >
         <Box
-          w="50%"
+          w={{ lg: "50%", base: "90%" }}
           display="flex"
-          // border="2px solid blue"
           justifyContent="center"
           alignItems="center"
           flexDirection="column"
           p="35px"
           className={styles.intro}
+          textAlign="center"
         >
           <Text fontSize="3xl" fontWeight="bold" my="15px">
             <span className={styles.highlighted}>Awesome Goal Tracker</span>
@@ -45,8 +46,8 @@ export default function Home() {
         </Box>
         <Image
           src={"/Home/progress_tracking.svg"}
-          height={350}
-          width={350}
+          height="350px"
+          width={{ lg: "40%", base: "80%" }}
           alt="Progress_tracking"
         />
       </Box>
@@ -71,22 +72,26 @@ export default function Home() {
             display="flex"
             justifyContent="space-evenly"
             alignItems="center"
-            my="20px"
+            my={{ lg: "20px", base: "50px" }}
+            flexWrap="wrap"
           >
             <Image
               src={"/Home/features.svg"}
-              height={350}
-              width={350}
+              height="350px"
+              width={{ lg: "40%", base: "80%" }}
               alt="features"
             />
             <Box
-              w="50%"
+              w={{ lg: "50%", base: "100%" }}
               display="flex"
               justifyContent="space-evenly"
               flexWrap="wrap"
               alignItems="center"
             >
-              <Text className={styles.featureCard}>
+              <Text
+                className={styles.featureCard}
+                w={{ lg: "40%", base: "65%" }}
+              >
                 <Image
                   src="/Home/progress_icon.png"
                   alt="progress"
@@ -95,15 +100,24 @@ export default function Home() {
                 />
                 Track your progress with exclusive progress bar
               </Text>
-              <Text className={styles.featureCard}>
+              <Text
+                className={styles.featureCard}
+                w={{ lg: "40%", base: "65%" }}
+              >
                 <CgNotes color="white" size="30px" /> Manage your daily to-do
                 list
               </Text>
-              <Text className={styles.featureCard}>
+              <Text
+                className={styles.featureCard}
+                w={{ lg: "40%", base: "65%" }}
+              >
                 <SiGooglemeet color="white" size="30px" />
                 Manage your meetings
               </Text>
-              <Text className={styles.featureCard}>
+              <Text
+                className={styles.featureCard}
+                w={{ lg: "40%", base: "65%" }}
+              >
                 <MdOutlineNoteAlt color="white" size="30px" />
                 Manage your personal notes
               </Text>
