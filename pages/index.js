@@ -6,8 +6,11 @@ import Link from "next/link";
 import { CgNotes } from "react-icons/cg";
 import { SiGooglemeet } from "react-icons/si";
 import { MdOutlineNoteAlt } from "react-icons/md";
+import { auth } from "../firebase-config";
+import { useAuthState } from "react-firebase-hooks/auth";
 
 export default function Home() {
+  const [user] = useAuthState(auth);
   return (
     <div className={styles.container}>
       <Head>
@@ -41,7 +44,7 @@ export default function Home() {
             Track Your daily progress,meetings,notes and more...
           </Text>
           <Button my="15px" size="lg">
-            <Link href="/login">Get started</Link>
+            <Link href="/login">{user ? "Goto Dashboard" : "Get started"}</Link>
           </Button>
         </Box>
         <Image

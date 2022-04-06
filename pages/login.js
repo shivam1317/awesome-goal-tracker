@@ -3,8 +3,57 @@ import { AiOutlineUser } from "react-icons/ai";
 import { BsKey } from "react-icons/bs";
 import styles from "../styles/Login.module.css";
 import { FcGoogle } from "react-icons/fc";
+import { useAuthState } from "react-firebase-hooks/auth";
+import {
+  signInWithEmailAndPassword,
+  GoogleAuthProvider,
+  signInWithPopup,
+} from "firebase/auth";
+import { auth } from "../firebase-config.js";
+import { useRouter } from "next/router";
+import { useState, useEffect } from "react";
 
-function login() {
+function Login() {
+  const [user] = useAuthState(auth);
+  const [userDetails, setUserDetails] = useState({
+    email: "",
+    password: "",
+  });
+  const router = useRouter();
+  useEffect(() => {
+    if (user) {
+      router.push("/home");
+    }
+  });
+
+  const inputEvent = (event) => {
+    const name = event.target.name;
+    const value = event.target.value;
+    setUserDetails((prev) => {
+      return {
+        ...prev,
+        [name]: value,
+      };
+    });
+  };
+
+  const userLogin = async (e) => {
+    e.preventDefault();
+    const { email, password } = userDetails;
+
+    console.log("Logging in...");
+    try {
+      const user = await signInWithEmailAndPassword(auth, email, password);
+      console.log(user);
+      router.push("/home");
+    } catch (error) {
+      console.log(error.message);
+      setUserDetails({
+        email: "",
+        password: "",
+      });
+    }
+  };
   const googleLogin = () => {
     console.log("Doing google login...");
   };
@@ -43,6 +92,9 @@ function login() {
             placeholder="Email"
             variant="flushed"
             type="email"
+            name="email"
+            value={userDetails.email}
+            onChange={inputEvent}
           />
           <AiOutlineUser size="30px" />
         </Square>
@@ -62,10 +114,18 @@ function login() {
             variant="flushed"
             placeholder="Password"
             type="password"
+            name="password"
+            value={userDetails.password}
+            onChange={inputEvent}
           />
           <BsKey size="30px" />
         </Square>
-        <Button colorScheme="blue" variant="ghost" className={styles.formInput}>
+        <Button
+          colorScheme="blue"
+          variant="ghost"
+          className={styles.formInput}
+          onClick={userLogin}
+        >
           {" "}
           Login
         </Button>
@@ -95,4 +155,4 @@ function login() {
   );
 }
 
-export default login;
+export default Login;
