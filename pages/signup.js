@@ -7,6 +7,8 @@ import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { useRouter } from "next/router";
 import { auth } from "../firebase-config";
 import { useAuthState } from "react-firebase-hooks/auth";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Signup = () => {
   const router = useRouter();
@@ -35,17 +37,61 @@ const Signup = () => {
   const passwordSignUp = async (e) => {
     e.preventDefault();
     console.log("Creating a user...");
+    const id = toast.loading("Signing up...");
     const { username, email, password } = userDetails;
     try {
       const user = await createUserWithEmailAndPassword(auth, email, password);
       await updateProfile(auth.currentUser, {
         displayName: username,
       });
+      toast.update(id, {
+        render: "Successfully logged in!",
+        type: "success",
+        isLoading: false,
+        autoClose: 3000,
+        closeOnClick: true,
+      });
       router.push("/home");
     } catch (error) {
       // Show different popups on different errors:
       // 1. Firebase: Error (auth/email-already-in-use).
       // 2. Firebase: Password should be at least 6 characters (auth/weak-password).
+      if (error.message === "Firebase: Error (auth/email-already-in-use).") {
+        toast.update(id, {
+          render: "Email is already in use!",
+          type: "error",
+          isLoading: false,
+          autoClose: 3000,
+          closeOnClick: true,
+        });
+      } else if (
+        error.message ===
+        "Firebase: Password should be at least 6 characters (auth/weak-password)."
+      ) {
+        toast.update(id, {
+          render: "Password must be atleast 6 characters",
+          type: "error",
+          isLoading: false,
+          autoClose: 3000,
+          closeOnClick: true,
+        });
+      } else if (error.message === "Firebase: Error (auth/invalid-email).") {
+        toast.update(id, {
+          render: "Invalid Email",
+          type: "error",
+          isLoading: false,
+          autoClose: 3000,
+          closeOnClick: true,
+        });
+      } else {
+        toast.update(id, {
+          render: "An error occured!",
+          type: "error",
+          isLoading: false,
+          autoClose: 3000,
+          closeOnClick: true,
+        });
+      }
       console.log(error.message);
       setUserDetails({
         username: "",
@@ -148,6 +194,7 @@ const Signup = () => {
           {" "}
           Sign up
         </Button>
+        <ToastContainer />
         <Text>
           {"Already registered?"}
           <Link color="blue.600" href="/login">

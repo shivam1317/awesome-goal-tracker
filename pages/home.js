@@ -5,6 +5,8 @@ import { Box, Button } from "@chakra-ui/react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function Home() {
   const [displayName, setDisplayName] = useState("");
@@ -23,12 +25,31 @@ function Home() {
   });
   const logoutUser = async (e) => {
     e.preventDefault();
+    const id = toast.loading("Logging out...");
     signOut(auth)
       .then(() => {
         console.log("Signed out successfully!");
         router.push("/login");
+        toast.update(id, {
+          render: "Logout successful..",
+          type: "success",
+          isLoading: false,
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+        });
       })
       .catch(() => {
+        toast.update(id, {
+          render: "Logout Failed!",
+          type: "error",
+          isLoading: false,
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+        });
         console.log("Some error occured!");
       });
   };
@@ -44,6 +65,7 @@ function Home() {
       >
         <div>Hello {displayName}</div>
         <Button onClick={logoutUser}>Logout</Button>
+        <ToastContainer />
       </Box>
     </>
   );

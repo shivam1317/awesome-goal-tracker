@@ -12,6 +12,8 @@ import {
 import { auth } from "../firebase-config.js";
 import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function Login() {
   const [user] = useAuthState(auth);
@@ -40,22 +42,58 @@ function Login() {
   const userLogin = async (e) => {
     e.preventDefault();
     const { email, password } = userDetails;
-
+    const id = toast.loading("Logging in...");
     console.log("Logging in...");
     try {
       const user = await signInWithEmailAndPassword(auth, email, password);
+      toast.update(id, {
+        render: "Successfully logged in!",
+        type: "success",
+        isLoading: false,
+        autoClose: 3000,
+        closeOnClick: true,
+      });
       console.log(user);
       router.push("/home");
     } catch (error) {
       console.log(error.message);
+      toast.update(id, {
+        render: "Invalid email or password!",
+        type: "error",
+        isLoading: false,
+        autoClose: 3000,
+        closeOnClick: true,
+      });
       setUserDetails({
         email: "",
         password: "",
       });
     }
   };
-  const googleLogin = () => {
-    console.log("Doing google login...");
+  const googleLogin = async (e) => {
+    e.preventDefault();
+    const id = toast.loading("Logging in with google...");
+    try {
+      const provider = new GoogleAuthProvider();
+      const userDetail = await signInWithPopup(auth, provider);
+      toast.update(id, {
+        render: "Login successfull",
+        type: "success",
+        isLoading: false,
+        autoClose: 3000,
+        closeOnClick: true,
+      });
+      router.push("/home");
+    } catch (error) {
+      console.log(error.message);
+      toast.update(id, {
+        render: "Google auth failed!",
+        type: "error",
+        isLoading: false,
+        autoClose: 3000,
+        closeOnClick: true,
+      });
+    }
   };
   return (
     <Box
@@ -129,6 +167,7 @@ function Login() {
           {" "}
           Login
         </Button>
+        <ToastContainer />
         <Square
           display="flex"
           direction="row"
