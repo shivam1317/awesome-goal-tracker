@@ -1,0 +1,74 @@
+.container {
+  height: 100vh;
+  width: 100%;
+  background-color: #f2f2f2;
+}
+
+.circularProgress {
+  position: relative;
+  height: 250px;
+  width: 250px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+
+  /* border: 2px solid red; */
+  background: #f2f2f2;
+  box-shadow: 22px 22px 44px #dcdcdc, -22px -22px 44px #ffffff;
+}
+.progressContainer {
+  border-radius: 50px;
+  background: #f2f2f2;
+  box-shadow: inset 12px 12px 24px #d5d5d5, inset -12px -12px 24px #ffffff;
+}
+
+.circularProgress:before {
+  content: "";
+  position: absolute;
+  height: 84%;
+  width: 84%;
+  background-color: #f2f2f2;
+  border-radius: 50%;
+  box-shadow: inset 12px 12px 24px #d5d5d5, inset -12px -12px 24px #ffffff;
+}
+.valueContainer {
+  position: relative;
+  font-family: "Poppins", sans-serif;
+  font-size: 50px;
+  color: #231c3d;
+}
+/* Navbar */
+
+.navbar {
+  color: white;
+  background-color: #989eee;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px,
+    rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+}
+.navlink {
+  /* border: 2px solid black; */
+  margin: 0px 5px;
+  border-radius: 10px;
+  padding: 15px 20px;
+  background: #989eee;
+  box-shadow: 8px 8px 16px #9096e2, -8px -8px 16px #a0a6fa;
+  transition: all 1s ease-in-out;
+}
+
+.navlink:hover {
+  background: #989eee;
+  box-shadow: inset 8px 8px 16px #8c91db, inset -8px -8px 16px #a4abff;
+}
+
+.menu {
+  padding: 15px;
+  border-radius: 15px;
+}
+
+.menu:hover {
+  background: #989eee;
+  box-shadow: inset 8px 8px 16px #8c91db, inset -8px -8px 16px #a4abff;
+}
+.menuLink {
+  padding: 10px;
+}

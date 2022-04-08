@@ -1,18 +1,45 @@
 import React from "react";
-import { signOut, onAuthStateChanged } from "firebase/auth";
+import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "../firebase-config";
-import { Box, Button } from "@chakra-ui/react";
+import { Box, Button, Text } from "@chakra-ui/react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import styles from "../styles/Dashboard.module.css";
+import Navbar from "../Components/Navbar";
+import Image from "next/image";
+
+const progress = () => {
+  let progressBar = document.querySelector("#circularProgress");
+  let valueContainer = document.querySelector("#valueContainer");
+  let progressValue = 0;
+  let progressEndValue = 60;
+  let speed = 20;
+  console.log("i got triggered!");
+
+  let progress = setInterval(() => {
+    progressValue++;
+
+    valueContainer.textContent = `${progressValue}%`;
+    progressBar.style.background = `conic-gradient(
+            #6177f2 ${progressValue * 3.6}deg,
+            #afaff0 ${progressValue * 3.6}deg
+        )`;
+
+    if (progressValue == progressEndValue) {
+      clearInterval(progress);
+    }
+  }, speed);
+};
 
 function Home() {
   const [displayName, setDisplayName] = useState("");
   const router = useRouter();
   const [user] = useAuthState(auth);
   useEffect(() => {
+    progress();
     if (!user) {
       router.push("/login");
     }
@@ -23,49 +50,58 @@ function Home() {
     } else {
     }
   });
-  const logoutUser = async (e) => {
-    e.preventDefault();
-    const id = toast.loading("Logging out...");
-    signOut(auth)
-      .then(() => {
-        console.log("Signed out successfully!");
-        router.push("/login");
-        toast.update(id, {
-          render: "Logout successful..",
-          type: "success",
-          isLoading: false,
-          autoClose: 3000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-        });
-      })
-      .catch(() => {
-        toast.update(id, {
-          render: "Logout Failed!",
-          type: "error",
-          isLoading: false,
-          autoClose: 3000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-        });
-        console.log("Some error occured!");
-      });
-  };
+
   return (
     <>
       <Box
-        display="flex"
-        justifyContent="center"
-        alignItems="center"
+        // display="flex"
+        // justifyContent="center"
+        // alignItems="center"
         w="100%"
         h="100vh"
         flexDirection="column"
+        className={styles.container}
       >
-        <div>Hello {displayName}</div>
-        <Button onClick={logoutUser}>Logout</Button>
+        <Navbar />
+        <Box
+          w="100%"
+          h="fit-content"
+          // border="2px solid red"
+          display="flex"
+          justifyContent="center"
+          alignItems="center"
+          p="5"
+        >
+          <Text mx="2" fontSize="xl">
+            Welcome {displayName}
+          </Text>
+          <Image
+            src="/Home/waving-hi.gif"
+            width={35}
+            height={35}
+            alt="waving"
+          />
+          {/* <Button onClick={logoutUser} mx="10">
+            Logout
+          </Button> */}
+        </Box>
         <ToastContainer />
+        <Box
+          m="10"
+          p="5"
+          // border="2px solid red"
+          w={{ lg: "30%", base: "85%" }}
+          display="flex"
+          justifyContent="center"
+          alignItems="center"
+          className={styles.progressContainer}
+        >
+          <div className={styles.circularProgress} id="circularProgress">
+            <div className={styles.valueContainer} id="valueContainer">
+              0%
+            </div>
+          </div>
+        </Box>
       </Box>
     </>
   );
