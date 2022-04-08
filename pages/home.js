@@ -12,20 +12,32 @@ import Navbar from "../Components/Navbar";
 import Image from "next/image";
 
 const progress = () => {
+  let colors = {
+    dark: "#2dc22f",
+    light: "#7ee07f",
+  };
+
   let progressBar = document.querySelector("#circularProgress");
   let valueContainer = document.querySelector("#valueContainer");
   let progressValue = 0;
-  let progressEndValue = 60;
+  let progressEndValue = 90;
   let speed = 20;
-  console.log("i got triggered!");
+  if (progressEndValue >= 0 && progressEndValue < 40) {
+    colors.light = "#e8765f";
+    colors.dark = "#ed4b2b";
+  } else if (progressEndValue >= 40 && progressEndValue < 80) {
+    colors.light = "#d99d6f";
+    colors.dark = "#e37622";
+  }
+  // console.log("i got triggered!");
 
   let progress = setInterval(() => {
     progressValue++;
 
     valueContainer.textContent = `${progressValue}%`;
     progressBar.style.background = `conic-gradient(
-            #6177f2 ${progressValue * 3.6}deg,
-            #afaff0 ${progressValue * 3.6}deg
+            ${colors.dark} ${progressValue * 3.6}deg,
+            ${colors.light} ${progressValue * 3.6}deg
         )`;
 
     if (progressValue == progressEndValue) {
