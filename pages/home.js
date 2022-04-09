@@ -83,16 +83,26 @@ function Home() {
           justifyContent="center"
           alignItems="center"
           p="5"
+          // border="2px solid red"
         >
-          <Text mx="2" fontSize="xl">
-            Welcome {displayName}
-          </Text>
-          <Image
-            src="/Home/waving-hi.gif"
-            width={35}
-            height={35}
-            alt="waving"
-          />
+          <Box
+            mt="100px"
+            w="100%"
+            display="flex"
+            justifyContent="center"
+            alignItems="center"
+          >
+            <Text mx="2" fontSize="xl">
+              Welcome {displayName}
+            </Text>
+            <Image
+              src="/Home/waving-hi.gif"
+              width={35}
+              height={35}
+              alt="waving"
+              className={styles.wave}
+            />
+          </Box>
           {/* <Button onClick={logoutUser} mx="10">
             Logout
           </Button> */}

@@ -51,7 +51,12 @@ const Navbar = () => {
   };
   return (
     <>
-      <Box className={styles.navbar} display="flex" flexDirection="column">
+      <Box
+        className={styles.navbar}
+        display="flex"
+        flexDirection="column"
+        position="fixed"
+      >
         <Box
           display="flex"
           justifyContent={{ lg: "space-between", md: "space-evenly" }}
@@ -95,35 +100,38 @@ const Navbar = () => {
               <CloseButton size="md" onClick={toggle} />
             ) : (
               <span className={styles.menu}>
-                <FiMenu onClick={toggle} cursor="pointer" mx="5" />
+                <FiMenu onClick={toggle} mx="5" />
               </span>
             )}
           </Hide>
         </Box>
         {show ? (
-          <Box
-            display="flex"
-            w="100%"
-            flexDirection="column"
-            justifyContent="space-evenly"
-            alignItems="center"
-            border="2px soild red"
-            p="3"
-            transition="all 1s ease-in-out"
-          >
-            <Link href="#">
-              <a className={styles.menuLink}>Todo</a>
-            </Link>
-            <Link href="#">
-              <a className={styles.menuLink}>Meetings</a>
-            </Link>
-            <Link href="#">
-              <a className={styles.menuLink}>Notes</a>
-            </Link>
-            <Link href="#">
-              <a className={styles.menuLink}>Logout</a>
-            </Link>
-          </Box>
+          <>
+            <hr className={styles.navhr} />
+            <Box
+              display="flex"
+              w="100%"
+              flexDirection="column"
+              justifyContent="space-evenly"
+              alignItems="center"
+              border="2px soild red"
+              p="3"
+              transition="all 1s ease-in-out"
+            >
+              <Link href="#">
+                <a className={styles.menuLink}>Todo</a>
+              </Link>
+              <Link href="#">
+                <a className={styles.menuLink}>Meetings</a>
+              </Link>
+              <Link href="#">
+                <a className={styles.menuLink}>Notes</a>
+              </Link>
+              <Link href="#">
+                <a className={styles.menuLink}>Logout</a>
+              </Link>
+            </Box>
+          </>
         ) : null}
       </Box>
     </>
