@@ -17,7 +17,7 @@
   box-shadow: 22px 22px 44px #dcdcdc, -22px -22px 44px #ffffff;
 }
 .progressContainer {
-  border-radius: 50px;
+  border-radius: 30px;
   background: #f2f2f2;
   box-shadow: inset 12px 12px 24px #d5d5d5, inset -12px -12px 24px #ffffff;
 }
@@ -43,7 +43,7 @@
   width: 100%;
   color: white;
   z-index: 100;
-  background-color: #989eee;
+  background-color: #7379ce;
   box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px,
     rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
 }
@@ -52,14 +52,14 @@
   margin: 0px 5px;
   border-radius: 10px;
   padding: 15px 20px;
-  background: #989eee;
-  box-shadow: 8px 8px 16px #9096e2, -8px -8px 16px #a0a6fa;
+  background: #7379ce;
+  box-shadow: 8px 8px 16px #656ab5, -8px -8px 16px #8188e7;
   transition: all 1s ease-in-out;
 }
 
 .navlink:hover {
-  background: #989eee;
-  box-shadow: inset 8px 8px 16px #8c91db, inset -8px -8px 16px #a4abff;
+  background: #7379ce;
+  box-shadow: inset 8px 8px 16px #656ab5, inset -8px -8px 16px #8188e7;
 }
 
 .menu {
@@ -69,8 +69,8 @@
 }
 
 .menu:hover {
-  background: #989eee;
-  box-shadow: inset 8px 8px 16px #8c91db, inset -8px -8px 16px #a4abff;
+  background: #7379ce;
+  box-shadow: inset 8px 8px 16px #656ab5, inset -8px -8px 16px #8188e7;
 }
 .menuLink {
   padding: 10px;
@@ -82,4 +82,35 @@
 /* Dashboard */
 .wave {
   margin-top: 250px;
+}
+.headDiv {
+  border-radius: 30px 30px 0px 0px;
+  background: #6d71b6;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px,
+    rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+  /* background: #ededed;
+  box-shadow: 11px 11px 22px #d1d1d1, -11px -11px 22px #ffffff; */
+}
+.taskDiv {
+  /* border-radius: 15px; */
+  background: #f2f2f2;
+  box-shadow: 7px 7px 14px #dfdfdf, -7px -7px 14px #ffffff;
+}
+
+.deleteIcon {
+  transition: all 0.3s ease-in-out;
+  cursor: pointer;
+  margin: 0px 10px;
+}
+
+.deleteIcon:hover {
+  color: red;
+}
+.taskTick {
+  transition: all 0.3s ease-in-out;
+  cursor: pointer;
+  margin: 0px 10px;
+}
+.taskTick:hover {
+  color: rgb(29, 205, 29);
 }
