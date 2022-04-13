@@ -5,12 +5,27 @@ import { MdDelete } from "react-icons/md";
 import { doc, getDoc, setDoc } from "firebase/firestore";
 import { db, auth } from "../firebase-config";
 import styles from "../styles/Dashboard.module.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 
 const Tasks = (props) => {
   const [user] = useAuthState(auth);
   const [completed, setCompleted] = useState(false);
+  const markCompleted = async () => {
+    const docRef = doc(db, "Tasks", user.displayName);
+    const docSnap = await getDoc(docRef);
+    if (docSnap.exists()) {
+      let currTaskChecker = docSnap.data().taskChecker;
+      currTaskChecker.map((task) => {
+        if (task.completed === true && task.taskName === props.task) {
+          setCompleted(true);
+        }
+      });
+    }
+  };
+  useEffect(() => {
+    markCompleted();
+  });
   const checkCompleted = async (e) => {
     setCompleted(!completed);
     const docRef = doc(db, "Tasks", user.displayName);

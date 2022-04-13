@@ -207,6 +207,7 @@ function Home() {
             w={{ lg: "60%", base: "95%" }}
             h={{ lg: "100%", base: "50%" }}
             // p="2"
+            my="4"
             className={styles.progressContainer}
           >
             <Box
