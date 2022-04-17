@@ -14,7 +14,7 @@
 
   /* border: 2px solid red; */
   background: #f2f2f2;
-  box-shadow: 22px 22px 44px #dcdcdc, -22px -22px 44px #ffffff;
+  /* box-shadow: 22px 22px 44px #dcdcdc, -22px -22px 44px #ffffff; */
 }
 .progressContainer {
   border-radius: 30px;
@@ -113,4 +113,39 @@
 }
 .taskTick:hover {
   color: rgb(29, 205, 29);
+}
+
+/* Meetings */
+.mySwiperSlide {
+  /* border: 2px solid green; */
+  padding: 15px;
+  display: flex;
+  justify-content: space-evenly;
+  flex-direction: column;
+  align-items: center;
+  width: 30%;
+  border-radius: 30px;
+  background: #f1efef;
+  box-shadow: 11px 11px 22px #e0dede, -11px -11px 22px #ffffff;
+}
+
+.mySwiper {
+  width: 100%;
+  padding: 20px;
+  /* border: 2px solid skyblue; */
+  /* background-color: #7379ce; */
+}
+
+.meetingName {
+  border-radius: 10px;
+  background: #f1efef;
+  box-shadow: inset 11px 11px 22px #e3e1e1, inset -11px -11px 22px #fffdfd;
+}
+
+.deleteMeet {
+  transition: all 0.3s ease-in-out;
+}
+
+.deleteMeet:hover {
+  background-color: rgb(225, 47, 47);
 }

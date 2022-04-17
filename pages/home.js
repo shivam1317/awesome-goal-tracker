@@ -1,10 +1,10 @@
 import React from "react";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth, db } from "../firebase-config";
-import { Box, Button, Text } from "@chakra-ui/react";
+import { Box, Button, Text, useDisclosure, Input } from "@chakra-ui/react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import styles from "../styles/Dashboard.module.css";
@@ -13,25 +13,44 @@ import Image from "next/image";
 import { setDoc, doc, collection, getDoc } from "firebase/firestore";
 import { useCollection } from "react-firebase-hooks/firestore";
 import Tasks from "../Components/Tasks";
+import Meetings from "../Components/Meetings";
+import {
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalFooter,
+  ModalBody,
+  ModalCloseButton,
+  FormControl,
+  FormLabel,
+  FormErrorMessage,
+} from "@chakra-ui/react";
 
 function Home() {
+  const { isOpen, onOpen, onClose } = useDisclosure();
   const [tasks] = useCollection(collection(db, "Tasks"));
   const [displayName, setDisplayName] = useState("");
+  const taskInput = useRef("");
   const router = useRouter();
   const [user] = useAuthState(auth);
   const progress = async (currdisplayName) => {
     const docRef = await doc(db, "Tasks", currdisplayName);
     const docSnap = await getDoc(docRef);
-    let taskLength,
+    let taskLength = 0,
       count = 0;
     if (docSnap.exists()) {
       let currTaskChecker = docSnap.data().taskChecker;
-      taskLength = currTaskChecker.length;
-      currTaskChecker.map((task) => {
-        if (task.completed) {
-          count = count + 1;
-        }
-      });
+      if (currTaskChecker === undefined) {
+        taskLength = 0;
+      } else {
+        taskLength = currTaskChecker.length;
+        currTaskChecker.map((task) => {
+          if (task.completed) {
+            count = count + 1;
+          }
+        });
+      }
     }
     let colors = {
       dark: "#2dc22f",
@@ -42,7 +61,10 @@ function Home() {
     let valueContainer = document.querySelector("#valueContainer");
     let progressValue = 0;
     let progressEndValue = parseInt((100 * count) / taskLength);
-    console.log(parseInt((100 * count) / taskLength));
+    if (isNaN(progressEndValue)) {
+      progressEndValue = 0;
+    }
+    console.log(progressEndValue);
     // let progressEndValue = 10;
     let speed = 20;
     if (progressEndValue >= 0 && progressEndValue < 40) {
@@ -93,7 +115,7 @@ function Home() {
   });
   const addTask = async (e) => {
     e.preventDefault();
-    const task = prompt("Add task");
+    const task = taskInput.current.value;
     const docRef = doc(db, "Tasks", displayName);
     const docSnap = await getDoc(docRef);
     if (docSnap.exists()) {
@@ -115,6 +137,8 @@ function Home() {
           task: currTasks,
           taskChecker: currTaskChecker,
         });
+        onClose();
+        taskInput.current.value = "";
       }
     } else {
       let currTasks = [];
@@ -129,8 +153,14 @@ function Home() {
           task: currTasks,
           taskChecker: currTaskChecker,
         });
+        onClose();
+        taskInput.current.value = "";
       }
     }
+  };
+  const clearData = () => {
+    onClose();
+    taskInput.current.value = "";
   };
 
   return (
@@ -171,9 +201,6 @@ function Home() {
               className={styles.wave}
             />
           </Box>
-          {/* <Button onClick={logoutUser} mx="10">
-            Logout
-          </Button> */}
         </Box>
         <ToastContainer />
         <Box
@@ -189,20 +216,63 @@ function Home() {
         >
           <Box
             m="10"
-            p="4"
+            // p="4"
             // border="2px solid red"
-            w={{ lg: "30%", base: "85%" }}
+            w={{ lg: "30%", base: "100%" }}
             display="flex"
+            h="85%"
             justifyContent="center"
             alignItems="center"
             className={styles.progressContainer}
+            flexDirection="column"
           >
-            <Box className={styles.circularProgress} id="circularProgress">
-              <Box className={styles.valueContainer} id="valueContainer">
+            <Text
+              backgroundColor="#6d71b6"
+              color="white"
+              textAlign="center"
+              w="100%"
+              p="4"
+              mb="4"
+              fontSize="xl"
+              borderRadius="30px 30px 0px 0px"
+              boxShadow="rgba(50, 50, 93, 0.25) 0px 13px 27px -5px,
+    rgba(0, 0, 0, 0.3) 0px 8px 16px -8px"
+            >
+              Your progress
+            </Text>
+            <div className={styles.circularProgress} id="circularProgress">
+              <div className={styles.valueContainer} id="valueContainer">
                 0%
-              </Box>
-            </Box>
+              </div>
+            </div>
           </Box>
+          <Modal isOpen={isOpen} onClose={clearData}>
+            <ModalOverlay />
+            <ModalContent>
+              <ModalHeader>Add a Task</ModalHeader>
+              <ModalCloseButton />
+              <ModalBody>
+                <FormControl my="2" isRequired>
+                  <FormLabel htmlFor="name">Task Name</FormLabel>
+                  <Input id="name" type="text" ref={taskInput} />
+                </FormControl>
+              </ModalBody>
+
+              <ModalFooter>
+                <Button
+                  colorScheme="blue"
+                  variant="outline"
+                  mr={3}
+                  onClick={onClose}
+                >
+                  Close
+                </Button>
+                <Button variant="solid" colorScheme="purple" onClick={addTask}>
+                  Submit
+                </Button>
+              </ModalFooter>
+            </ModalContent>
+          </Modal>
           <Box
             w={{ lg: "60%", base: "95%" }}
             h={{ lg: "100%", base: "50%" }}
@@ -221,7 +291,7 @@ function Home() {
               <Text fontSize="xl" mx="4" color="white">
                 Your Todo List
               </Text>
-              <Button size="md" onClick={addTask} mx="4">
+              <Button size="md" onClick={onOpen} mx="4">
                 Add Task
               </Button>
             </Box>
@@ -257,6 +327,15 @@ function Home() {
               })}
             </Box>
           </Box>
+        </Box>
+        <Box
+          w="100%"
+          backgroundColor="#f1efef"
+          display="flex"
+          justifyContent="center"
+          alignItems="center"
+        >
+          <Meetings />
         </Box>
       </Box>
     </>

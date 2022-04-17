@@ -27,13 +27,12 @@ const Tasks = (props) => {
     markCompleted();
   });
   const checkCompleted = async (e) => {
-    setCompleted(!completed);
     const docRef = doc(db, "Tasks", user.displayName);
     const docSnap = await getDoc(docRef);
+    setCompleted(!completed);
     if (docSnap.exists()) {
       let currTasks = docSnap.data().task;
       let currTaskChecker = docSnap.data().taskChecker;
-      console.log(currTaskChecker);
       currTaskChecker.map((task) => {
         if (task.taskName === e) {
           task.completed = !task.completed;
@@ -46,7 +45,6 @@ const Tasks = (props) => {
     }
   };
   const deleteTask = async (e) => {
-    console.log(e, "Got deleted");
     const docRef = doc(db, "Tasks", user.displayName);
     const docSnap = await getDoc(docRef);
     if (docSnap.exists()) {
@@ -60,7 +58,7 @@ const Tasks = (props) => {
       });
       await setDoc(doc(db, "Tasks", user.displayName), {
         task: currTasks,
-        taskChcker: currTaskChecker,
+        taskChecker: currTaskChecker,
       });
     }
   };
