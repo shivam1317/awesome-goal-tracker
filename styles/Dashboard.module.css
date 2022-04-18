@@ -132,8 +132,6 @@
 .mySwiper {
   width: 100%;
   padding: 20px;
-  /* border: 2px solid skyblue; */
-  /* background-color: #7379ce; */
 }
 
 .meetingName {
@@ -148,4 +146,23 @@
 
 .deleteMeet:hover {
   background-color: rgb(225, 47, 47);
+}
+
+.noteName {
+  border-radius: 10px;
+  background: #f1efef;
+  box-shadow: 12px 12px 24px #e0dede, -12px -12px 24px #ffffff;
+}
+
+.mySwiperSlide2 {
+  height: 250px;
+  padding: 15px;
+  display: flex;
+  justify-content: space-evenly;
+  flex-direction: column;
+  align-items: center;
+  width: 30%;
+  border-radius: 30px;
+  background: #f1efef;
+  box-shadow: 9px 9px 18px #dbd9d9, -9px -9px 18px #ffffff;
 }

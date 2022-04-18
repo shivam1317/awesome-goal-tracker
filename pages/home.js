@@ -14,6 +14,7 @@ import { setDoc, doc, collection, getDoc } from "firebase/firestore";
 import { useCollection } from "react-firebase-hooks/firestore";
 import Tasks from "../Components/Tasks";
 import Meetings from "../Components/Meetings";
+import Notes from "../Components/Notes";
 import {
   Modal,
   ModalOverlay,
@@ -336,6 +337,15 @@ function Home() {
           alignItems="center"
         >
           <Meetings />
+        </Box>
+        <Box
+          w="100%"
+          backgroundColor="#f1efef"
+          display="flex"
+          justifyContent="center"
+          alignItems="center"
+        >
+          <Notes />
         </Box>
       </Box>
     </>

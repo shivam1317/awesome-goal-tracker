@@ -136,7 +136,7 @@ const Meetings = () => {
   };
   useEffect(() => {
     setWindowWidth(window.innerWidth);
-  });
+  }, []);
   return (
     <>
       <Modal isOpen={isOpen} onClose={clearData}>
