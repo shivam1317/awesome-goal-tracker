@@ -1,5 +1,12 @@
 import React from "react";
-import { Box, Hide, Show, Text, CloseButton } from "@chakra-ui/react";
+import {
+  Box,
+  Hide,
+  Show,
+  Text,
+  CloseButton,
+  useColorMode,
+} from "@chakra-ui/react";
 import NextLink from "next/link";
 import styles from "../styles/Dashboard.module.css";
 import { FiMenu } from "react-icons/fi";
@@ -9,8 +16,10 @@ import { signOut } from "firebase/auth";
 import { auth } from "../firebase-config";
 import { useRouter } from "next/router";
 import { Link, animateScroll as scroll } from "react-scroll";
+import { BsFillMoonFill, BsSunFill } from "react-icons/bs";
 
 const Navbar = () => {
+  const { colorMode, toggleColorMode } = useColorMode();
   const router = useRouter();
   const logoutUser = async (e) => {
     e.preventDefault();
@@ -120,6 +129,17 @@ const Navbar = () => {
                   Logout
                 </a>
               </Text>
+              <Text
+                cursor="pointer"
+                className={styles.navlink}
+                onClick={toggleColorMode}
+              >
+                {colorMode == "light" ? (
+                  <BsFillMoonFill color="white" />
+                ) : (
+                  <BsSunFill />
+                )}
+              </Text>
             </Box>
             <ToastContainer />
           </Show>
@@ -187,6 +207,17 @@ const Navbar = () => {
                   Logout
                 </a>
               </NextLink>
+              <Text
+                cursor="pointer"
+                className={styles.navlink}
+                onClick={toggleColorMode}
+              >
+                {colorMode == "light" ? (
+                  <BsFillMoonFill color="white" />
+                ) : (
+                  <BsSunFill />
+                )}
+              </Text>
             </Box>
           </>
         ) : null}

@@ -11,15 +11,26 @@
   border-radius: 50%;
   display: grid;
   place-items: center;
-
-  /* border: 2px solid red; */
-  background: #f2f2f2;
-  /* box-shadow: 22px 22px 44px #dcdcdc, -22px -22px 44px #ffffff; */
+}
+.circularProgressDark {
+  position: relative;
+  height: 250px;
+  width: 250px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
 }
 .progressContainer {
   border-radius: 30px;
   background: #f2f2f2;
   box-shadow: inset 12px 12px 24px #d5d5d5, inset -12px -12px 24px #ffffff;
+}
+
+.progressContainerDark {
+  color: white;
+  border-radius: 30px;
+  background: #242d3b;
+  box-shadow: inset 12px 12px 24px #1d242f, inset -12px -12px 24px #2b3647;
 }
 
 .circularProgress:before {
@@ -31,11 +42,19 @@
   border-radius: 50%;
   box-shadow: inset 12px 12px 24px #d5d5d5, inset -12px -12px 24px #ffffff;
 }
+.circularProgressDark:before {
+  content: "";
+  position: absolute;
+  height: 84%;
+  width: 84%;
+  border-radius: 50%;
+  background: #242d3b;
+  box-shadow: inset 12px 12px 24px #1d242f, inset -12px -12px 24px #2b3647;
+}
 .valueContainer {
   position: relative;
   font-family: "Poppins", sans-serif;
   font-size: 50px;
-  color: #231c3d;
 }
 /* Navbar */
 
@@ -96,6 +115,10 @@
   background: #f2f2f2;
   box-shadow: 7px 7px 14px #dfdfdf, -7px -7px 14px #ffffff;
 }
+.taskDivDark {
+  background: #242d3b;
+  box-shadow: 7px 7px 14px #1d242f, -7px -7px 14px #2b3647;
+}
 
 .deleteIcon {
   transition: all 0.3s ease-in-out;
@@ -129,6 +152,18 @@
   box-shadow: 11px 11px 22px #e0dede, -11px -11px 22px #ffffff;
 }
 
+.mySwiperSlideDark {
+  padding: 15px;
+  display: flex;
+  justify-content: space-evenly;
+  flex-direction: column;
+  align-items: center;
+  width: 30%;
+  border-radius: 30px;
+  background: #242d3b;
+  box-shadow: 11px 11px 22px #1d242f, -11px -11px 22px #2b3647;
+}
+
 .mySwiper {
   width: 100%;
   padding: 20px;
@@ -138,6 +173,12 @@
   border-radius: 10px;
   background: #f1efef;
   box-shadow: inset 11px 11px 22px #e3e1e1, inset -11px -11px 22px #fffdfd;
+}
+
+.meetingNameDark {
+  border-radius: 10px;
+  background: #242d3b;
+  box-shadow: inset 11px 11px 22px #1d242f, inset -11px -11px 22px #2b3647;
 }
 
 .deleteMeet {
@@ -153,6 +194,11 @@
   background: #f1efef;
   box-shadow: 12px 12px 24px #e0dede, -12px -12px 24px #ffffff;
 }
+.noteNameDark {
+  border-radius: 10px;
+  background: #242d3b;
+  box-shadow: 12px 12px 24px #1d242f, -12px -12px 24px #2b3647;
+}
 
 .mySwiperSlide2 {
   height: 250px;
@@ -165,4 +211,17 @@
   border-radius: 30px;
   background: #f1efef;
   box-shadow: 9px 9px 18px #dbd9d9, -9px -9px 18px #ffffff;
+}
+
+.mySwiperSlide2Dark {
+  height: 250px;
+  padding: 15px;
+  display: flex;
+  justify-content: space-evenly;
+  flex-direction: column;
+  align-items: center;
+  width: 30%;
+  border-radius: 30px;
+  background: #242d3b;
+  box-shadow: 9px 9px 18px #1d242f, -9px -9px 18px #2b3647;
 }

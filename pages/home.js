@@ -1,7 +1,15 @@
 import React from "react";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth, db } from "../firebase-config";
-import { Box, Button, Text, useDisclosure, Input } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  Text,
+  useDisclosure,
+  Input,
+  useColorModeValue,
+  useColorMode,
+} from "@chakra-ui/react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useRouter } from "next/router";
 import { useEffect, useState, useRef } from "react";
@@ -29,6 +37,7 @@ import {
 } from "@chakra-ui/react";
 
 function Home() {
+  const { colorMode } = useColorMode();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [tasks] = useCollection(collection(db, "Tasks"));
   const [displayName, setDisplayName] = useState("");
@@ -164,12 +173,16 @@ function Home() {
     taskInput.current.value = "";
   };
 
+  // Dark mode config
+  const bg = useColorModeValue("#f2f2f2", "#242d3b");
+  const meetbg = useColorModeValue("#f1efef", "#242d3b");
   return (
     <>
       <Box
         // display="flex"
         // justifyContent="center"
         // alignItems="center"
+        backgroundColor={bg}
         w="100%"
         h="100vh"
         flexDirection="column"
@@ -212,20 +225,22 @@ function Home() {
           flexWrap="wrap"
           // border="2px solid red"
           h={{ lg: "430px", base: "fit-content" }}
-          p="4"
-          backgroundColor="#f2f2f2"
+          p="6"
+          backgroundColor={bg}
           id="todo"
         >
           <Box
             m="10"
-            // p="4"
-            // border="2px solid red"
             w={{ lg: "30%", base: "100%" }}
             display="flex"
-            h="85%"
+            h="90%"
             justifyContent="center"
             alignItems="center"
-            className={styles.progressContainer}
+            className={
+              colorMode == "light"
+                ? styles.progressContainer
+                : styles.progressContainerDark
+            }
             flexDirection="column"
           >
             <Text
@@ -242,11 +257,24 @@ function Home() {
             >
               Your progress
             </Text>
-            <div className={styles.circularProgress} id="circularProgress">
-              <div className={styles.valueContainer} id="valueContainer">
+            <Box
+              className={
+                colorMode == "light"
+                  ? styles.circularProgress
+                  : styles.circularProgressDark
+              }
+              background={bg}
+              id="circularProgress"
+              mb="4"
+            >
+              <Box
+                className={styles.valueContainer}
+                id="valueContainer"
+                color={colorMode == "dark" ? "white" : "black"}
+              >
                 0%
-              </div>
-            </div>
+              </Box>
+            </Box>
           </Box>
           <Modal isOpen={isOpen} onClose={clearData}>
             <ModalOverlay />
@@ -280,7 +308,11 @@ function Home() {
             h={{ lg: "100%", base: "50%" }}
             // p="2"
             my="4"
-            className={styles.progressContainer}
+            className={
+              colorMode == "light"
+                ? styles.progressContainer
+                : styles.progressContainerDark
+            }
           >
             <Box
               display="flex"
@@ -307,7 +339,7 @@ function Home() {
                 "&::-webkit-scrollbar": {
                   width: "10px",
                   borderRadius: "8px",
-                  backgroundColor: `#f2f2f2`,
+                  backgroundColor: colorMode == "light" ? "#f2f2f2" : "2D3748",
                   cursor: "pointer",
                 },
                 "&::-webkit-scrollbar-thumb": {
@@ -332,7 +364,7 @@ function Home() {
         </Box>
         <Box
           w="100%"
-          backgroundColor="#f1efef"
+          backgroundColor={meetbg}
           display="flex"
           justifyContent="center"
           alignItems="center"
@@ -342,7 +374,7 @@ function Home() {
         </Box>
         <Box
           w="100%"
-          backgroundColor="#f1efef"
+          backgroundColor={meetbg}
           display="flex"
           justifyContent="center"
           alignItems="center"

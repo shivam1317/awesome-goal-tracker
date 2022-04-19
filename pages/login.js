@@ -1,4 +1,12 @@
-import { Box, Input, Button, Square, Link, Text } from "@chakra-ui/react";
+import {
+  Box,
+  Input,
+  Button,
+  Square,
+  Link,
+  Text,
+  LightMode,
+} from "@chakra-ui/react";
 import { AiOutlineUser } from "react-icons/ai";
 import { BsKey } from "react-icons/bs";
 import styles from "../styles/Login.module.css";
@@ -96,101 +104,105 @@ function Login() {
     }
   };
   return (
-    <Box
-      className={styles.loginContainer}
-      display="flex"
-      justifyContent="center"
-      alignItems="center"
-    >
+    <LightMode>
       <Box
-        className={styles.loginForm}
-        h={{ lg: "420px", base: "450px" }}
-        w={{ lg: "400px", base: "90%" }}
+        className={styles.loginContainer}
         display="flex"
-        p={{ lg: "5px", base: "15px" }}
-        justifyContent="space-evenly"
-        flexDirection="column"
+        justifyContent="center"
         alignItems="center"
       >
-        <Text fontSize="2xl" className={styles.heading} fontWeight="bold">
-          Login
-        </Text>
-        <Square
+        <Box
+          className={styles.loginForm}
+          h={{ lg: "420px", base: "450px" }}
+          w={{ lg: "400px", base: "90%" }}
           display="flex"
-          direction="row"
+          p={{ lg: "5px", base: "15px" }}
           justifyContent="space-evenly"
+          flexDirection="column"
           alignItems="center"
-          w="85%"
-          h="15%"
-          my="8px"
-          className={styles.formInput}
         >
-          <Input
-            width="65%"
-            placeholder="Email"
-            variant="flushed"
-            type="email"
-            name="email"
-            value={userDetails.email}
-            onChange={inputEvent}
-          />
-          <AiOutlineUser size="30px" />
-        </Square>
+          <Text fontSize="2xl" className={styles.heading} fontWeight="bold">
+            Login
+          </Text>
+          <Square
+            display="flex"
+            direction="row"
+            justifyContent="space-evenly"
+            alignItems="center"
+            w="85%"
+            h="15%"
+            my="8px"
+            className={styles.formInput}
+          >
+            <Input
+              width="65%"
+              placeholder="Email"
+              variant="flushed"
+              type="email"
+              name="email"
+              value={userDetails.email}
+              onChange={inputEvent}
+              _placeholder={{ color: "gray.500" }}
+            />
+            <AiOutlineUser size="30px" />
+          </Square>
 
-        <Square
-          display="flex"
-          direction="row"
-          justifyContent="space-evenly"
-          alignItems="center"
-          w="85%"
-          h="15%"
-          my="8px"
-          className={styles.formInput}
-        >
-          <Input
-            width="65%"
-            variant="flushed"
-            placeholder="Password"
-            type="password"
-            name="password"
-            value={userDetails.password}
-            onChange={inputEvent}
-          />
-          <BsKey size="30px" />
-        </Square>
-        <Button
-          colorScheme="blue"
-          variant="ghost"
-          className={styles.formInput}
-          onClick={userLogin}
-        >
-          {" "}
-          Login
-        </Button>
-        <ToastContainer />
-        <Square
-          display="flex"
-          direction="row"
-          justifyContent="space-evenly"
-          alignItems="center"
-          w="85%"
-          h="15%"
-          my="8px"
-          className={styles.formInput}
-          cursor="pointer"
-          onClick={googleLogin}
-        >
-          Continue with <FcGoogle size="25px" />
-        </Square>
-        <Text>
-          {"Haven't registered?"}
-          <Link color="blue.600" href="/signup">
+          <Square
+            display="flex"
+            direction="row"
+            justifyContent="space-evenly"
+            alignItems="center"
+            w="85%"
+            h="15%"
+            my="8px"
+            className={styles.formInput}
+          >
+            <Input
+              width="65%"
+              variant="flushed"
+              placeholder="Password"
+              type="password"
+              name="password"
+              value={userDetails.password}
+              onChange={inputEvent}
+              _placeholder={{ color: "gray.500" }}
+            />
+            <BsKey size="30px" />
+          </Square>
+          <Button
+            colorScheme="blue"
+            variant="ghost"
+            className={styles.formInput}
+            onClick={userLogin}
+          >
             {" "}
-            Register now
-          </Link>
-        </Text>
+            Login
+          </Button>
+          <ToastContainer />
+          <Square
+            display="flex"
+            direction="row"
+            justifyContent="space-evenly"
+            alignItems="center"
+            w="85%"
+            h="15%"
+            my="8px"
+            className={styles.formInput}
+            cursor="pointer"
+            onClick={googleLogin}
+          >
+            Continue with <FcGoogle size="25px" />
+          </Square>
+          <Text>
+            {"Haven't registered?"}
+            <Link color="blue.600" href="/signup">
+              {" "}
+              Register now
+            </Link>
+          </Text>
+        </Box>
       </Box>
-    </Box>
+    </LightMode>
   );
 }
 

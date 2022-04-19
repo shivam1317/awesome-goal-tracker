@@ -1,4 +1,12 @@
-import { Box, Input, Button, Square, Link, Text } from "@chakra-ui/react";
+import {
+  Box,
+  Input,
+  Button,
+  Square,
+  Link,
+  Text,
+  LightMode,
+} from "@chakra-ui/react";
 import { AiOutlineUser, AiOutlineMail } from "react-icons/ai";
 import { BsKey } from "react-icons/bs";
 import styles from "../styles/Signup.module.css";
@@ -102,108 +110,113 @@ const Signup = () => {
   };
 
   return (
-    <Box
-      className={styles.loginContainer}
-      display="flex"
-      justifyContent="center"
-      alignItems="center"
-    >
+    <LightMode>
       <Box
-        className={styles.loginForm}
-        h="450px"
-        w={{ lg: "400px", base: "90%" }}
+        className={styles.loginContainer}
         display="flex"
-        p={{ lg: "5px", base: "15px" }}
-        justifyContent="space-evenly"
-        flexDirection="column"
+        justifyContent="center"
         alignItems="center"
       >
-        <Text fontSize="2xl" className={styles.heading} fontWeight="bold">
-          Sign Up
-        </Text>
-        <Square
+        <Box
+          className={styles.loginForm}
+          h="450px"
+          w={{ lg: "400px", base: "90%" }}
           display="flex"
-          direction="row"
+          p={{ lg: "5px", base: "15px" }}
           justifyContent="space-evenly"
+          flexDirection="column"
           alignItems="center"
-          w="85%"
-          h="15%"
-          my="5px"
-          className={styles.formInput}
         >
-          <Input
-            width="65%"
-            placeholder="Username"
-            variant="flushed"
-            type="email"
-            onChange={inputEvent}
-            name="username"
-            value={userDetails.username}
-          />
-          <AiOutlineUser size="30px" />
-        </Square>
-        <Square
-          display="flex"
-          direction="row"
-          justifyContent="space-evenly"
-          alignItems="center"
-          w="85%"
-          h="15%"
-          my="5px"
-          className={styles.formInput}
-        >
-          <Input
-            width="65%"
-            placeholder="Email"
-            variant="flushed"
-            type="email"
-            onChange={inputEvent}
-            name="email"
-            value={userDetails.email}
-          />
-          <AiOutlineMail size="30px" />
-        </Square>
+          <Text fontSize="2xl" className={styles.heading} fontWeight="bold">
+            Sign Up
+          </Text>
+          <Square
+            display="flex"
+            direction="row"
+            justifyContent="space-evenly"
+            alignItems="center"
+            w="85%"
+            h="15%"
+            my="5px"
+            className={styles.formInput}
+          >
+            <Input
+              width="65%"
+              placeholder="Username"
+              variant="flushed"
+              type="email"
+              onChange={inputEvent}
+              name="username"
+              value={userDetails.username}
+              _placeholder={{ color: "gray.500" }}
+            />
+            <AiOutlineUser size="30px" />
+          </Square>
+          <Square
+            display="flex"
+            direction="row"
+            justifyContent="space-evenly"
+            alignItems="center"
+            w="85%"
+            h="15%"
+            my="5px"
+            className={styles.formInput}
+          >
+            <Input
+              width="65%"
+              placeholder="Email"
+              variant="flushed"
+              type="email"
+              onChange={inputEvent}
+              name="email"
+              value={userDetails.email}
+              _placeholder={{ color: "gray.500" }}
+            />
+            <AiOutlineMail size="30px" />
+          </Square>
 
-        <Square
-          display="flex"
-          direction="row"
-          justifyContent="space-evenly"
-          alignItems="center"
-          w="85%"
-          h="15%"
-          my="5px"
-          className={styles.formInput}
-        >
-          <Input
-            width="65%"
-            placeholder="Password"
-            variant="flushed"
-            type="password"
-            onChange={inputEvent}
-            name="password"
-            value={userDetails.password}
-          />
-          <BsKey size="30px" />
-        </Square>
-        <Button
-          colorScheme="blue"
-          variant="ghost"
-          className={styles.formInput}
-          onClick={passwordSignUp}
-        >
-          {" "}
-          Sign up
-        </Button>
-        <ToastContainer />
-        <Text>
-          {"Already registered?"}
-          <Link color="blue.600" href="/login">
+          <Square
+            display="flex"
+            direction="row"
+            justifyContent="space-evenly"
+            alignItems="center"
+            w="85%"
+            h="15%"
+            my="5px"
+            className={styles.formInput}
+          >
+            <Input
+              width="65%"
+              placeholder="Password"
+              variant="flushed"
+              type="password"
+              onChange={inputEvent}
+              name="password"
+              value={userDetails.password}
+              _placeholder={{ color: "gray.500" }}
+            />
+            <BsKey size="30px" />
+          </Square>
+          <Button
+            colorScheme="blue"
+            variant="ghost"
+            className={styles.formInput}
+            onClick={passwordSignUp}
+          >
             {" "}
-            Login
-          </Link>
-        </Text>
+            Sign up
+          </Button>
+          <ToastContainer />
+          <Text>
+            {"Already registered?"}
+            <Link color="blue.600" href="/login">
+              {" "}
+              Login
+            </Link>
+          </Text>
+        </Box>
       </Box>
-    </Box>
+    </LightMode>
   );
 };
 

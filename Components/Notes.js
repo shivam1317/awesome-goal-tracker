@@ -6,6 +6,7 @@ import {
   Input,
   useDisclosure,
   Textarea,
+  useColorMode,
 } from "@chakra-ui/react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth, db } from "../firebase-config";
@@ -44,6 +45,7 @@ const Notes = () => {
     onOpen: onShowModalOpen,
     onClose: onShowModalClose,
   } = useDisclosure();
+  const { colorMode } = useColorMode();
   const noteHeading = useRef("");
   const noteDescription = useRef("");
   const [notes] = useCollection(collection(db, "Notes"));
@@ -247,7 +249,11 @@ const Notes = () => {
                 return (
                   <>
                     <SwiperSlide
-                      className={styles.mySwiperSlide2}
+                      className={
+                        colorMode == "light"
+                          ? styles.mySwiperSlide2
+                          : styles.mySwiperSlide2Dark
+                      }
                       key={e.noteName}
                     >
                       <Text
@@ -257,7 +263,11 @@ const Notes = () => {
                         p="2"
                         textAlign="center"
                         fontWeight="bold"
-                        className={styles.noteName}
+                        className={
+                          colorMode == "light"
+                            ? styles.noteName
+                            : styles.noteNameDark
+                        }
                       >
                         {e.noteName}
                       </Text>
@@ -268,6 +278,9 @@ const Notes = () => {
                         my="2"
                         w="90%"
                         display="flex"
+                        color={
+                          colorMode == "light" ? "black" : "whiteAlpha.800"
+                        }
                       >
                         {e.noteDesc.substring(0, 100)}
                         {"..."}
@@ -282,7 +295,7 @@ const Notes = () => {
                           size="md"
                           p="2"
                           my="1"
-                          color="white"
+                          color={colorMode == "light" ? "white" : "gray.700"}
                           colorScheme="purple"
                           onClick={() => readMore(e.noteName, e.noteDesc)}
                         >

@@ -6,7 +6,14 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/effect-fade";
 import styles from "../styles/Dashboard.module.css";
-import { Box, Text, Button, useDisclosure, Input } from "@chakra-ui/react";
+import {
+  Box,
+  Text,
+  Button,
+  useDisclosure,
+  Input,
+  useColorMode,
+} from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useCollection } from "react-firebase-hooks/firestore";
@@ -31,6 +38,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const Meetings = () => {
+  const { colorMode } = useColorMode();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [meetings] = useCollection(collection(db, "Meetings"));
   const [meetDetails, setMeetDetails] = useState({
@@ -237,7 +245,11 @@ const Meetings = () => {
                 return (
                   <>
                     <SwiperSlide
-                      className={styles.mySwiperSlide}
+                      className={
+                        colorMode == "light"
+                          ? styles.mySwiperSlide
+                          : styles.mySwiperSlideDark
+                      }
                       key={e.meetingName}
                     >
                       <Text
@@ -247,7 +259,11 @@ const Meetings = () => {
                         p="2"
                         textAlign="center"
                         fontWeight="bold"
-                        className={styles.meetingName}
+                        className={
+                          colorMode == "light"
+                            ? styles.meetingName
+                            : styles.meetingNameDark
+                        }
                       >
                         {e.meetingName}
                       </Text>
@@ -258,6 +274,9 @@ const Meetings = () => {
                         display="flex"
                         justifyContent="space-evenly"
                         w="65%"
+                        color={
+                          colorMode == "light" ? "black" : "whiteAlpha.800"
+                        }
                       >
                         Date: {e.meetingTime.toDate().toLocaleDateString()}
                         <MdDateRange size={22} />
@@ -269,6 +288,9 @@ const Meetings = () => {
                         display="flex"
                         justifyContent="space-evenly"
                         w="65%"
+                        color={
+                          colorMode == "light" ? "black" : "whiteAlpha.800"
+                        }
                       >
                         Time: {e.meetingTime.toDate().toLocaleTimeString()}
                         <AiOutlineClockCircle size={22} />
@@ -284,7 +306,7 @@ const Meetings = () => {
                           p="2"
                           my="1"
                           // backgroundColor="#8e98f0"
-                          color="white"
+                          color={colorMode == "light" ? "white" : "gray.700"}
                           colorScheme="purple"
                         >
                           <Link href={e.meetingLink}>
