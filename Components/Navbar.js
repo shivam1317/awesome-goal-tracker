@@ -1,6 +1,6 @@
 import React from "react";
 import { Box, Hide, Show, Text, CloseButton } from "@chakra-ui/react";
-import Link from "next/link";
+import NextLink from "next/link";
 import styles from "../styles/Dashboard.module.css";
 import { FiMenu } from "react-icons/fi";
 import { useState } from "react";
@@ -8,6 +8,7 @@ import { ToastContainer, toast } from "react-toastify";
 import { signOut } from "firebase/auth";
 import { auth } from "../firebase-config";
 import { useRouter } from "next/router";
+import { Link, animateScroll as scroll } from "react-scroll";
 
 const Navbar = () => {
   const router = useRouter();
@@ -78,15 +79,42 @@ const Navbar = () => {
               alignItems="center"
               w="45%"
             >
-              <Link href="#">
-                <a className={styles.navlink}>Todo</a>
-              </Link>
-              <Link href="#">
-                <a className={styles.navlink}>Meetings</a>
-              </Link>
-              <Link href="#">
-                <a className={styles.navlink}>Notes</a>
-              </Link>
+              <NextLink href="#" passHref>
+                <Link
+                  to="todo"
+                  spy={true}
+                  smooth={true}
+                  offset={-70}
+                  duration={500}
+                  className={styles.navlink}
+                >
+                  Todo
+                </Link>
+              </NextLink>
+              <NextLink href="#" passHref>
+                <Link
+                  to="meeting"
+                  spy={true}
+                  smooth={true}
+                  offset={-70}
+                  duration={500}
+                  className={styles.navlink}
+                >
+                  Meetings
+                </Link>
+              </NextLink>
+              <NextLink href="#" passHref>
+                <Link
+                  to="note"
+                  spy={true}
+                  smooth={true}
+                  offset={-70}
+                  duration={500}
+                  className={styles.navlink}
+                >
+                  Notes
+                </Link>
+              </NextLink>
               <Text cursor="pointer">
                 <a className={styles.navlink} onClick={logoutUser}>
                   Logout
@@ -118,18 +146,47 @@ const Navbar = () => {
               p="3"
               transition="all 1s ease-in-out"
             >
-              <Link href="#">
-                <a className={styles.menuLink}>Todo</a>
-              </Link>
-              <Link href="#">
-                <a className={styles.menuLink}>Meetings</a>
-              </Link>
-              <Link href="#">
-                <a className={styles.menuLink}>Notes</a>
-              </Link>
-              <Link href="#">
-                <a className={styles.menuLink}>Logout</a>
-              </Link>
+              <NextLink href="#" passHref>
+                <Link
+                  className={styles.menuLink}
+                  to="todo"
+                  spy={true}
+                  smooth={true}
+                  offset={-70}
+                  duration={500}
+                >
+                  Todo
+                </Link>
+              </NextLink>
+              <NextLink href="#" passHref>
+                <Link
+                  className={styles.menuLink}
+                  to="meeting"
+                  spy={true}
+                  smooth={true}
+                  offset={-70}
+                  duration={500}
+                >
+                  Meetings
+                </Link>
+              </NextLink>
+              <NextLink href="#" passHref>
+                <Link
+                  className={styles.menuLink}
+                  to="note"
+                  spy={true}
+                  smooth={true}
+                  offset={-70}
+                  duration={500}
+                >
+                  Notes
+                </Link>
+              </NextLink>
+              <NextLink href="#" passHref>
+                <a className={styles.menuLink} onClick={logoutUser}>
+                  Logout
+                </a>
+              </NextLink>
             </Box>
           </>
         ) : null}

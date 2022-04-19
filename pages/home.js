@@ -214,6 +214,7 @@ function Home() {
           h={{ lg: "430px", base: "fit-content" }}
           p="4"
           backgroundColor="#f2f2f2"
+          id="todo"
         >
           <Box
             m="10"
@@ -335,6 +336,7 @@ function Home() {
           display="flex"
           justifyContent="center"
           alignItems="center"
+          id="meeting"
         >
           <Meetings />
         </Box>
@@ -344,6 +346,7 @@ function Home() {
           display="flex"
           justifyContent="center"
           alignItems="center"
+          id="note"
         >
           <Notes />
         </Box>

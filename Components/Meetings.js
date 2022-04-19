@@ -232,7 +232,7 @@ const Meetings = () => {
           className={styles.mySwiper}
         >
           {meetings?.docs.map((meetingList) => {
-            if (meetingList.id === user.displayName) {
+            if (user && meetingList.id === user.displayName) {
               return meetingList.data().meetings?.map((e) => {
                 return (
                   <>

@@ -242,7 +242,7 @@ const Notes = () => {
           className={styles.mySwiper}
         >
           {notes?.docs.map((noteList) => {
-            if (noteList.id === user.displayName) {
+            if (user && noteList.id === user.displayName) {
               return noteList.data().notes?.map((e) => {
                 return (
                   <>
